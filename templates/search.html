@@ -2,12 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Book Store | Home</title>
+    <title>Book Store | Search Results</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <style>
-     body {
-        background-color: #f9f9f9;
-        font-family: "Poppins", sans-serif;
+        body {
+            background-color: #f9f9f9;
+            font-family: "Poppins", sans-serif;
         }
 
         .navbar {
@@ -30,10 +30,10 @@
             transition: all 0.3s ease;
             display: flex;
             flex-direction: column;
-            align-items: center; 
-            justify-content: center; 
-            text-align: center; 
-            padding: 15px; /* ✅ Add padding so content isn't tight */
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 15px;
             background-color: #fff;
         }
 
@@ -42,58 +42,56 @@
         }
 
         .card img {
-    width: 200px;
-    height: 250px;
-    object-fit: contain; /* ✅ Shows full image without cutting */
-    background-color: #f8f9fa; /* ✅ Adds a light background for small images */
-    border-radius: 15px;
-    padding: 10px; /* ✅ Adds spacing around the image */
-}
-
+            width: 150px;  /* smaller image for grid */
+            height: 200px;
+            object-fit: contain;
+            background-color: #f8f9fa;
+            border-radius: 15px;
+            padding: 5px;
+        }
 
         .card-title {
-            font-size: 1.1rem;
+            font-size: 1rem;
             font-weight: 600;
             margin-top: 8px;
         }
 
         .card-text {
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             color: #666;
             margin-bottom: 10px;
         }
 
-      .buy-btn {
-        background-color: #007bff;
-        color: white;
-        border-radius: 8px;
-        font-weight: 500;
-        padding: 8px 30px; /* ✅ wider horizontally */
-        transition: all 0.3s ease;
-        border: none;
-    }
-
+        .buy-btn {
+            background-color: #007bff;
+            color: white;
+            border-radius: 8px;
+            font-weight: 500;
+            padding: 6px 25px;
+            transition: all 0.3s ease;
+            border: none;
+        }
 
         .buy-btn:hover {
             background-color: #0056b3;
             transform: scale(1.03);
         }
-
     </style>
 </head>
 <body>
 
     <!-- Navbar with Search -->
     <nav class="navbar navbar-dark px-4">
-        <a class="navbar-brand" href="#">📚 BookStore</a>
+        <a class="navbar-brand" href="/">📚 BookStore</a>
         <form class="d-flex" method="POST" action="/search">
             <input class="form-control me-2 search-bar" type="text" name="query" placeholder="Search by title, author..." required>
             <button class="btn btn-outline-light" type="submit">Search</button>
         </form>
     </nav>
 
-    <!-- Product Grid -->
     <div class="container my-5">
+        <h4 class="mb-4">Search Results for: "{{ query }}"</h4>
+
         <div class="row g-4">
             {% for item in items %}
             <div class="col-md-3 col-sm-6">
@@ -103,7 +101,7 @@
                         <h5 class="card-title">{{ item['Book-Title'] }}</h5>
                         <p class="card-text mb-1"><strong>Author:</strong> {{ item['Book-Author'] }}</p>
                         <p class="card-text mb-1"><strong>Publisher:</strong> {{ item['Publisher'] }}</p>
-                        <p class="card-text"><strong>Rating:</strong> ⭐ {{ item['Avg-Rating'] }}</p>
+                        <p class="card-text"><strong>Rating:</strong> ⭐ {{ item['Book-Rating'] }}</p>
                     </div>
                     <div class="card-footer bg-transparent border-0 text-center pb-3">
                         <form action="/order" method="POST">
